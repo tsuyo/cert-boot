@@ -3,16 +3,16 @@ entries:
   cert-boot:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-10-31T00:43:34.539307+09:00"
+    created: "2021-10-31T02:01:40.878029+09:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
       version: 4.0.6
     description: A helm chart for cert-boot
-    digest: 62fd3244953dae362c236c4f3009b301e35961b6cb2a21e366580732f5966dc1
+    digest: bc7c9906d2128fb41826b60b9c8a39ab2db0b886fe38c262530b1d8e34de0774
     name: cert-boot
     type: application
     urls:
     - cert-boot-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-31T00:43:34.535241+09:00"
+generated: "2021-10-31T02:01:40.87439+09:00"
