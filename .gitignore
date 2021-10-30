@@ -1,0 +1,6 @@
+.DS_Store
+*.lic
+*.pem
+*.key
+# for helm-secrets
+*.yaml.dec

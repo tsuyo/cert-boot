@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: route53-letsencrypt-issuer
+spec:
+  acme:
+    email: {{ .Values.letsencrypt.email }}
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory # this issued "Fake LE Intermediate X1" so just testing
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: route53-letsencrypt-account-key
+    solvers:
+    - dns01:
+        route53:
+          region: {{ .Values.route53.region }}
+          accessKeyID: {{ .Values.aws.access_key_id }}
+          secretAccessKeySecretRef:
+            name: route53-credentials-secret
+            key: secret-access-key
+          # you can also assume a role with these credentials
+          # role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
+      selector:
+        {{- if .Values.dnsNames }}
+        dnsNames:
+        {{- range $dnsName := .Values.dnsNames }}
+          - {{ $dnsName | quote }}
+        {{- end -}}
+        {{- end -}}
