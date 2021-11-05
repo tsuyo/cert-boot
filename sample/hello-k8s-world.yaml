@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world 
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - image: gcr.io/google-samples/hello-app:1.0
+        imagePullPolicy: Always
+        name: hello-world
+        ports:
+        - name: hello-world
+          containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+  labels:
+    name: hello-world
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080
+  selector:
+    app: hello-world
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-world
+  annotations:
+    cert-manager.io/cluster-issuer: route53-letsencrypt-issuer
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: '<YOURHOST>'
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: hello-world
+            port:
+              number: 80
+  tls:
+    - hosts:
+      - <YOURHOST>
