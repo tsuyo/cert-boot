@@ -48,6 +48,9 @@ dnsNames:
 aws:
     access_key_id: xxxxxxxxxxxxxxxxxxxx
     secret_access_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# Namespace of cert-manager
+cm:
+    namespace: cert-manager
 # Ingress LB IP
 ingress-nginx:
     controller:
