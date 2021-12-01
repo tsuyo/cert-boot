@@ -74,6 +74,8 @@ Events:
   Normal  Generated  4m59s  cert-manager  Stored new private key in temporary Secret resource "certificate-dwtmf"
   Normal  Requested  4m59s  cert-manager  Created new CertificateRequest resource "certificate-q9kmt"
   Normal  Issuing    65s    cert-manager  The certificate has been successfully issued
+$ kubectl describe secret certificate-tls | grep alt-names
+Annotations:  cert-manager.io/alt-names: *.platform-dev.tsuyo.org,platform-dev.tsuyo.org,tsuyo.org
 ```
 Once your certificate is ready, you can access https://platform-dev.tsuyo.org and https://<subdomain>.platform-dev.tsuyo.org with HTTPS.
 You can use a sample application for your test as follows:
